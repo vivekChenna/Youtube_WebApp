@@ -1,8 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import VideoCard from "./VideoCard";
+
+import { Link } from "react-router-dom";
 
 import { YouTube_API } from "../config/hard_coded_data";
 
 const VideoContainer = () => {
+  const [videoData, setVideoData] = useState([]);
+
   useEffect(() => {
     getYoutubeData();
   }, []);
@@ -12,12 +18,18 @@ const VideoContainer = () => {
 
     const response = await data.json();
 
-    console.log(response.items);
+    setVideoData(response.items);
   };
 
   return (
-    <div>
-      <h1>hye</h1>
+    <div className="ml-1 mt-4 flex justify-evenly flex-wrap">
+      {videoData.map((data) => {
+        return (
+          <Link to={"/watch?v=" + data.id} key={data.id}>
+            <VideoCard info={data} />
+          </Link>
+        );
+      })}
     </div>
   );
 };

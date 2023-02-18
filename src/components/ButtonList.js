@@ -10,6 +10,7 @@ const ButtonList = () => {
     "TollyWood Music",
     "Love Songs",
     "Motivation",
+    "Comedy",
     "News",
     "Mantras",
   ];

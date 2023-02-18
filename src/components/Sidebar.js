@@ -15,6 +15,7 @@ import LocalFireDepartmentOutlinedIcon from "@mui/icons-material/LocalFireDepart
 import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.IsmenuOpen);
@@ -25,14 +26,16 @@ const Sidebar = () => {
   }
 
   return (
-    <div className=" col-span-1 flex flex-col gap-4 pl-5 pt-3 shadow-lg ">
+    <div className="  flex flex-col gap-4 pl-5 pt-3  w-56">
       <div>
         <ul>
-          <li className="flex gap-4 items-center pb-2 pl-2 cursor-pointer hover:bg-gray-200 rounded-lg">
-            <span>
-              <HomeIcon />
-            </span>
-            <span>Home</span>
+          <li className=" flex items-center pb-2 mb-1 pt-1 pl-2 cursor-point bg-gray-200 rounded-lg">
+            <Link to="/" className=" flex items-center gap-4">
+              <span className="">
+                <HomeIcon />
+              </span>
+              <span>Home</span>
+            </Link>
           </li>
 
           <li className="flex gap-4 items-center pb-2  pl-2  cursor-pointer  hover:bg-gray-200 rounded-lg">

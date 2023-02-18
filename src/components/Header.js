@@ -12,7 +12,7 @@ const Header = () => {
   };
 
   return (
-    <div className="grid grid-flow-col justify-between shadow-lg">
+    <div className="grid grid-flow-col justify-between">
       <div className="flex col-span-1 items-center">
         {/* <img src={HamburgerLogo} className=" w-5 h-5 mr-2" alt="menu" /> */}
         <MenuRoundedIcon
@@ -21,6 +21,7 @@ const Header = () => {
             ToggleSideBar();
           }}
         />
+
         <a href="/">
           <img
             src="https://cdn.mos.cms.futurecdn.net/8gzcr6RpGStvZFA2qRt4v6.jpg"
@@ -28,6 +29,7 @@ const Header = () => {
             className=" h-20 max-w-md cursor-pointer"
           />
         </a>
+
         <p className=" pb-6 pr-1 text-sm font-medium text-gray-600">IN</p>
       </div>
 
