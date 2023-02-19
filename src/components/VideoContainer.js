@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 import { YouTube_API } from "../config/hard_coded_data";
 
+import Shimmer from "./Shimmer";
+
 const VideoContainer = () => {
   const [videoData, setVideoData] = useState([]);
 
@@ -21,7 +23,9 @@ const VideoContainer = () => {
     setVideoData(response.items);
   };
 
-  return (
+  return videoData.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="ml-1 mt-4 flex justify-evenly flex-wrap">
       {videoData.map((data) => {
         return (

@@ -10,6 +10,7 @@ import MainContainer from "./components/MainContainer";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import WatchPage from "./components/WatchPage";
+import Shimmer from "./components/Shimmer";
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/watch",
         element: <WatchPage />,
+      },
+      {
+        path: "/shimmer",
+        element: <Shimmer />,
       },
     ],
   },
