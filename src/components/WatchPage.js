@@ -17,7 +17,7 @@ const WatchPage = () => {
   console.log(params.get("v"));
 
   return (
-    <div className="pl-10">
+    <div className="pl-10 flex justify-start">
       <iframe
         width="1000"
         height="500"

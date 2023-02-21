@@ -26,7 +26,7 @@ const VideoContainer = () => {
   return videoData.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="ml-1 mt-4 flex justify-evenly flex-wrap">
+    <div className="mt-4 flex justify-evenly flex-wrap">
       {videoData.map((data) => {
         return (
           <Link to={"/watch?v=" + data.id} key={data.id}>

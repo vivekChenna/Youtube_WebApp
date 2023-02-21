@@ -1,8 +1,6 @@
 import React from "react";
 
 const VideoCard = ({ info }) => {
-  console.log(info);
-
   const { snippet, statistics } = info;
 
   const { channelTitle, title, thumbnails } = snippet;
@@ -11,7 +9,11 @@ const VideoCard = ({ info }) => {
 
   return (
     <div className="max-h-fit p-2 ml-5 mb-6 w-72">
-      <img src={thumbnails.medium.url} alt="thumbnail" className="pb-2" />
+      <img
+        src={thumbnails.medium.url}
+        alt="thumbnail"
+        className="pb-2 rounded-3xl w-full"
+      />
       <ul>
         <li className="font-bold text-sm pb-1">{title}</li>
         <div>

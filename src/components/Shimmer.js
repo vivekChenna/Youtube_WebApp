@@ -1,4 +1,3 @@
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import ShimmerCard from "./ShimmerCard";
 
@@ -20,8 +19,8 @@ const Shimmer = () => {
       <div className="flex flex-wrap justify-evenly">
         {Array(50)
           .fill("")
-          .map((e) => {
-            return <ShimmerCard />;
+          .map((e, index) => {
+            return <ShimmerCard key={index} />;
           })}
       </div>
     </div>
