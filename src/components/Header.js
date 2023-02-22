@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import SearchIcon from "@mui/icons-material/Search";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 
 import { YouTube_Suggestion_API } from "../config/hard_coded_data";
+import { cacheResults } from "../utils/searchSuggestionSlice";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const [suggestions, SetSuggestions] = useState([]);
+
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -17,8 +20,29 @@ const Header = () => {
     dispatch(toggleMenu());
   };
 
+  const searchCache = useSelector((store) => store.Suggestion);
+
+  /**
+   * 
+        * store.Suggestion will give u the empty object
+        my search cache will look like
+        searchCache =   {
+
+          "iphone" : ["iphone 12","iphone 13","iphone 14"]
+
+          }
+
+          if the search is not present in my  Cache(object) then i will dispatch an action
+   */
+
   useEffect(() => {
-    const timer = setTimeout(() => getSuggestions(), 200);
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        SetSuggestions(searchCache[searchQuery]);
+      } else {
+        getSuggestions();
+      }
+    }, 500);
 
     return () => {
       clearTimeout(timer);
@@ -26,13 +50,18 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSuggestions = async () => {
+    console.log("API CALL - ", searchQuery);
     const data = await fetch(YouTube_Suggestion_API + searchQuery);
 
     const response = await data.json();
 
-    console.log(response[1]);
-
     SetSuggestions(response[1]);
+
+    dispatch(
+      cacheResults({
+        [searchQuery]: response[1],
+      })
+    );
   };
 
   const getData = (data) => {
@@ -71,29 +100,33 @@ const Header = () => {
             onChange={(e) => {
               setSearchQuery(e.target.value);
             }}
+            onFocus={() => setShowSuggestion(true)}
+            onBlur={() => setShowSuggestion(false)}
           />
-
           <button className=" border border-gray-400 px-5 py-2 rounded-r-full text-lg hover:bg-gray-200">
             <SearchIcon />
           </button>
-          <div className="absolute pl-2">
-            <ul className="w-[32.5rem] border-1 bg-white shadow-xl rounded-xl">
-              {suggestions.map((element) => {
-                return (
-                  <li
-                    className=" flex gap-2 pt-2 pb-2 hover:bg-gray-200"
-                    key={element}
-                    onClick={() => {
-                      getData(element);
-                    }}
-                  >
-                    <SearchIcon />
-                    {element}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+
+          {showSuggestion && (
+            <div className="absolute pl-2">
+              <ul className="w-[32.5rem] border-1 bg-white shadow-xl rounded-xl">
+                {suggestions.map((element) => {
+                  return (
+                    <li
+                      className=" flex gap-2 pt-2 pb-2 hover:bg-gray-200"
+                      key={element}
+                      onClick={() => {
+                        getData(element);
+                      }}
+                    >
+                      <SearchIcon />
+                      {element}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 

@@ -17,8 +17,8 @@ const VideoCard = ({ info }) => {
       <ul>
         <li className="font-bold text-sm pb-1">{title}</li>
         <div>
-          <span className=" text-sm pr-4">{channelTitle}</span>
-          <span className="text-sm">{viewCount} views</span>
+          <span className=" text-sm pr-4 font-semibold">{channelTitle}</span>
+          <span className="text-sm text-gray-600">{viewCount} views</span>
         </div>
       </ul>
     </div>

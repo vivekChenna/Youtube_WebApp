@@ -17,15 +17,15 @@ const WatchPage = () => {
   console.log(params.get("v"));
 
   return (
-    <div className="pl-10 flex justify-start">
+    <div className="pl-10">
       <iframe
         width="1000"
         height="500"
         src={"https://www.youtube.com/embed/" + params.get("v")}
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
     </div>
   );
